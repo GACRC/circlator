@@ -1,5 +1,4 @@
 FROM ubuntu
-MAINTAINER Paul Pham <docker@aquaron.com>
 
 RUN apt-get update \
  && apt-get upgrade -y \
@@ -11,4 +10,9 @@ RUN apt-get update \
  && ln -s /usr/bin/python3 /usr/bin/python \
  && pip3 install --upgrade pip \
  && pip3 install circlator \
- && circlator progcheck
+ && circlator progcheck \
+ && apt-get install --purge make g++ zlib1g-dev ncurses-dev git vim wget \
+ && apt-get autoclean
+
+WORKDIR /data
+ENTRYPOINT ["circlator"]
